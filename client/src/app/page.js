@@ -7,7 +7,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const handleBookTable = () => {
-    window.location.href = '/book-table'; // Redirect to backend URL
+    window.location.href = 'https://table-booking-hzcopvvm2-vasundharaba24s-projects.vercel.app/book-table'; // Redirect to backend URL
   };
 
   return (
