@@ -1,43 +1,24 @@
-'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-
-export default function SuccessPage() {
-  const searchParams = useSearchParams();
+export default function SuccessPage({ name, date, time }) {
   const router = useRouter();
 
-  // State to check if search parameters are ready
-  const [isParamsReady, setIsParamsReady] = useState(false);
-  
-  const name = searchParams.get('name');
-  const date = searchParams.get('date');
-  const time = searchParams.get('time');
-
-  // Ensure search parameters are available before rendering
   useEffect(() => {
-    if (name && date && time) {
-      setIsParamsReady(true);
-    }
-  }, [name, date, time]);
+    // Redirect to the homepage after 10 seconds
+    const timer = setTimeout(() => {
+      router.push('/');
+    }, 10000); // 10 seconds
 
-  useEffect(() => {
-    // Redirect to the homepage after 10 seconds once the parameters are available
-    if (isParamsReady) {
-      const timer = setTimeout(() => {
-        router.push('/');
-      }, 10000); // 10 seconds
+    // Cleanup the timer if the component unmounts before timeout
+    return () => clearTimeout(timer);
+  }, [router]);
 
-      // Cleanup the timer if the component unmounts before timeout
-      return () => clearTimeout(timer);
-    }
-  }, [isParamsReady, router]);
-
-  if (!isParamsReady) {
+  if (!name || !date || !time) {
     return (
       <div style={{ textAlign: 'center', padding: '50px' }}>
         <h1>Loading...</h1>
-        <p>Please wait while we prepare your reservation details...</p>
+        <p>We couldn't retrieve the reservation details. Please try again later.</p>
       </div>
     );
   }
@@ -50,4 +31,18 @@ export default function SuccessPage() {
       <p>You will be redirected to the homepage in 10 seconds...</p>
     </div>
   );
+}
+
+// Server-side function to fetch query parameters
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const { name, date, time } = query;
+
+  return {
+    props: {
+      name: name || null,
+      date: date || null,
+      time: time || null
+    }
+  };
 }
