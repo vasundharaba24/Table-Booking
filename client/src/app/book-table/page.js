@@ -35,7 +35,7 @@ export default function BookTablePage() {
   const fetchAvailableSlots = async (selectedDate) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://restaurant-booking-dy89.vercel.app/availability?date=${selectedDate}`);
+      const response = await fetch(`http://localhost:4000/api/availability?date=${selectedDate}`);
       if (!response.ok) {
         throw new Error('Error fetching availability');
       }
@@ -118,7 +118,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('https://restaurant-booking-dy89.vercel.app/book-table', {
+      const response = await fetch('http://localhost:4000/api/book-table', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
