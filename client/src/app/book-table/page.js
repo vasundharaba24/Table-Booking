@@ -35,7 +35,7 @@ export default function BookTablePage() {
   const fetchAvailableSlots = async (selectedDate) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:4000/api/availability?date=${selectedDate}`);
+      const response = await fetch(`https://restaurant-booking-dy89.vercel.app/availability?date=${selectedDate}`);
       if (!response.ok) {
         throw new Error('Error fetching availability');
       }
@@ -118,7 +118,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/book-table', {
+      const response = await fetch('https://restaurant-booking-dy89.vercel.app/book-table', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -129,15 +129,13 @@ export default function BookTablePage() {
       }
 
       const data = await response.json();
-
-      // Send confirmation email after successful booking
-      await sendConfirmationEmail(formData.email, formData.date, formData.time);
-
-      // Generate a toast for success
-      alert(data.message || 'Table booked successfully! Confirmation email sent.');
-
-      // Redirect to homepage on successful booking
-      router.push('/');
+      if (response.ok) {
+        router.push(
+          `/success?name=${encodeURIComponent(formData.name)}&date=${encodeURIComponent(formData.date)}&time=${encodeURIComponent(formData.time)}`
+        );
+      } else {
+        alert(data.message || 'Slot not available. Please choose another.');
+      }
     } catch (error) {
       console.error('Error booking table:', error);
       alert('Failed to book the table.');
