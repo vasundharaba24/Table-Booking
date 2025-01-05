@@ -7,7 +7,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const handleBookTable = () => {
-    router.push('https://table-booking-hzcopvvm2-vasundharaba24s-projects.vercel.app/book-table'); // Navigate to the book table page
+    router.push('/book-table'); // Navigate to the book table page
   };
 
   return (
