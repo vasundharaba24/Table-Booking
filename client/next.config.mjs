@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: '/book-table',
-        destination: 'https://your-backend.com/book-table',
+        destination: 'https://table-booking-hzcopvvm2-vasundharaba24s-projects.vercel.app',
         permanent: false, // Use true for 308 permanent redirect
       },
     ];
