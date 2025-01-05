@@ -1,27 +1,25 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';
 
-export default function SuccessPage({ name, date, time }) {
+import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+export default function SuccessPage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
 
+  const name = searchParams.get('name');
+  const date = searchParams.get('date');
+  const time = searchParams.get('time');
+
   useEffect(() => {
-    // Redirect to the homepage after 10 seconds
+    // Redirect to the homepage after 20 seconds
     const timer = setTimeout(() => {
       router.push('/');
-    }, 10000); // 10 seconds
+    }, 10000); // 20 seconds
 
     // Cleanup the timer if the component unmounts before timeout
     return () => clearTimeout(timer);
   }, [router]);
-
-  if (!name || !date || !time) {
-    return (
-      <div style={{ textAlign: 'center', padding: '50px' }}>
-        <h1>Loading...</h1>
-        <p>We couldn't retrieve the reservation details. Please try again later.</p>
-      </div>
-    );
-  }
 
   return (
     <div style={{ textAlign: 'center', padding: '50px' }}>
@@ -31,18 +29,4 @@ export default function SuccessPage({ name, date, time }) {
       <p>You will be redirected to the homepage in 10 seconds...</p>
     </div>
   );
-}
-
-// Server-side function to fetch query parameters
-export async function getServerSideProps(context) {
-  const { query } = context;
-  const { name, date, time } = query;
-
-  return {
-    props: {
-      name: name || null,
-      date: date || null,
-      time: time || null
-    }
-  };
 }
