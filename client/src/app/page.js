@@ -7,7 +7,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const handleBookTable = () => {
-    router.push('/book-table'); // Navigate to the book table page
+    router.push('https://restaurant-booking-dy89.vercel.app/book-table'); // Navigate to the book table page
   };
 
   return (
