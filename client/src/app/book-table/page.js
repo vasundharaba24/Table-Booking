@@ -129,13 +129,15 @@ export default function BookTablePage() {
       }
 
       const data = await response.json();
-      if (response.ok) {
-        router.push(
-          `/success?name=${encodeURIComponent(formData.name)}&date=${encodeURIComponent(formData.date)}&time=${encodeURIComponent(formData.time)}`
-        );
-      } else {
-        alert(data.message || 'Slot not available. Please choose another.');
-      }
+
+      // Send confirmation email after successful booking
+      await sendConfirmationEmail(formData.email, formData.date, formData.time);
+
+      // Generate a toast for success
+      alert(data.message || 'Table booked successfully! Confirmation email sent.');
+
+      // Redirect to homepage on successful booking
+      router.push('/');
     } catch (error) {
       console.error('Error booking table:', error);
       alert('Failed to book the table.');
