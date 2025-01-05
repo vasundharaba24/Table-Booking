@@ -1,21 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import './homepage.css'; // Import the CSS file
+import './homepage.css';
 
 export default function HomePage() {
   const router = useRouter();
 
   const handleBookTable = () => {
-    router.push('/book-table'); // Navigate to the book table page
+    window.location.href = 'https://your-backend.com/book-table'; // Redirect to backend URL
   };
 
   return (
     <div className="container">
-      {/* Overlay */}
       <div className="overlay"></div>
-
-      {/* Content */}
       <div className="content">
         <h1>Welcome to Cafe De Paris</h1>
         <button onClick={handleBookTable} className="button">
