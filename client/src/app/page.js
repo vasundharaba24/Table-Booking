@@ -7,7 +7,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const handleBookTable = () => {
-    window.location.href = 'https://your-backend.com/book-table'; // Redirect to backend URL
+    window.location.href = '/book-table'; // Redirect to backend URL
   };
 
   return (
