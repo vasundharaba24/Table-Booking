@@ -35,7 +35,7 @@ export default function BookTablePage() {
   const fetchAvailableSlots = async (selectedDate) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:4000/api/availability?date=${selectedDate}`);
+      const response = await fetch(`https://table-booking-s47e.onrender.com/availability?date=${selectedDate}`);
       if (!response.ok) {
         throw new Error('Error fetching availability');
       }
@@ -64,7 +64,7 @@ export default function BookTablePage() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:4000/api/send-verification-code', {
+      const response = await fetch('https://table-booking-s47e.onrender.com/send-verification-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
@@ -87,7 +87,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/verify-code', {
+      const response = await fetch('https://table-booking-s47e.onrender.com/api/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -118,7 +118,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/book-table', {
+      const response = await fetch('https://table-booking-s47e.onrender.com/book-table', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -146,7 +146,7 @@ export default function BookTablePage() {
 
   const sendConfirmationEmail = async (email, date, time) => {
     try {
-      const response = await fetch('http://localhost:4000/api/send-confirmation-email', {
+      const response = await fetch('https://table-booking-s47e.onrender.com/send-confirmation-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, date, time }),
