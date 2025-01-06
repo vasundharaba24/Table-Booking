@@ -18,8 +18,9 @@ export default function HomePage() {
       {/* Content */}
       <div className="content">
         <h1>Welcome to Cafe De Paris</h1>
-        <Link classname="button">Book Table</Link>
-
+        <button onClick={handleBookTable} className="button">
+          Book Table
+        </button>
       </div>
     </div>
   );
