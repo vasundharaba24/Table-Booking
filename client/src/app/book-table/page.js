@@ -35,7 +35,7 @@ export default function BookTablePage() {
   const fetchAvailableSlots = async (selectedDate) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/availability?date=${selectedDate}`);
+      const response = await fetch(`https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/api/availability?date=${selectedDate}`);
       if (!response.ok) {
         throw new Error('Error fetching availability');
       }
@@ -64,7 +64,7 @@ export default function BookTablePage() {
       return;
     }
     try {
-      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/send-verification-code', {
+      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/api/send-verification-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
@@ -87,7 +87,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/verify-code', {
+      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/api/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -146,7 +146,7 @@ export default function BookTablePage() {
 
   const sendConfirmationEmail = async (email, date, time) => {
     try {
-      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/send-confirmation-email', {
+      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/api/send-confirmation-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, date, time }),
