@@ -118,7 +118,7 @@ export default function BookTablePage() {
     }
 
     try {
-      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/api/book-table', {
+      const response = await fetch('https://table-booking-fty4j4kuz-vasundharaba24s-projects.vercel.app/book-table', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
